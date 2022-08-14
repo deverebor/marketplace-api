@@ -1,6 +1,7 @@
 package dev.oerebor.marketplace.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import dev.oerebor.marketplace.entities.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.io.Serial;
@@ -12,21 +13,27 @@ import java.time.Instant;
 public class OrderEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant createdAt;
+    
+    private Integer orderStatus;
+    
     @ManyToOne
     @JoinColumn(name = "client_id")
     private UserEntity client;
     
     public OrderEntity() {}
     
-    public OrderEntity(Long id, Instant createdAt, UserEntity client) {
+    public OrderEntity(Long id, Instant createdAt, OrderStatus orderStatus, UserEntity client) {
         super();
         this.id = id;
         this.createdAt = createdAt;
+        setOrderStatus(orderStatus);
         this.client = client;
     }
     
@@ -44,6 +51,16 @@ public class OrderEntity implements Serializable {
     
     public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
+    }
+    
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+    
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if(orderStatus != null) {
+            this.orderStatus = orderStatus.getCode();
+        }
     }
     
     public UserEntity getClient() {

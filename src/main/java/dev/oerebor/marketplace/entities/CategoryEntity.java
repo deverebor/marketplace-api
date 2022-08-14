@@ -3,6 +3,8 @@ package dev.oerebor.marketplace.entities;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -14,6 +16,9 @@ public class CategoryEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    
+    @Transient
+    private Set<ProductEntity> products = new HashSet<>();
     
     public CategoryEntity() {
     
@@ -38,6 +43,10 @@ public class CategoryEntity implements Serializable {
     
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public Set<ProductEntity> getProducts() {
+        return products;
     }
     
     @Override

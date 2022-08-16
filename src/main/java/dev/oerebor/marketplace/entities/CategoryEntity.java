@@ -1,8 +1,12 @@
 package dev.oerebor.marketplace.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -14,6 +18,10 @@ public class CategoryEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
+    private Set<ProductEntity> products = new HashSet<>();
     
     public CategoryEntity() {
     
@@ -38,6 +46,10 @@ public class CategoryEntity implements Serializable {
     
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public Set<ProductEntity> getProducts() {
+        return products;
     }
     
     @Override

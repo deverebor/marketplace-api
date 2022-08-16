@@ -1,5 +1,7 @@
 package dev.oerebor.marketplace.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,7 +19,8 @@ public class CategoryEntity implements Serializable {
     private Long id;
     private String name;
     
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<ProductEntity> products = new HashSet<>();
     
     public CategoryEntity() {

@@ -7,6 +7,8 @@ import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -26,6 +28,10 @@ public class OrderEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private UserEntity client;
+    
+    
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItemEntity> items = new HashSet<>();
     
     public OrderEntity() {}
     
@@ -55,6 +61,10 @@ public class OrderEntity implements Serializable {
     
     public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(orderStatus);
+    }
+    
+    public Set<OrderItemEntity> getItems() {
+        return items;
     }
     
     public void setOrderStatus(OrderStatus orderStatus) {

@@ -1,5 +1,6 @@
 package dev.oerebor.marketplace.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.oerebor.marketplace.entities.pk.OrderItemPk;
 
 import javax.persistence.EmbeddedId;
@@ -16,7 +17,7 @@ public class OrderItemEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
-    private OrderItemPk id;
+    private final OrderItemPk id = new OrderItemPk();
     private Integer quantity;
     private Double price;
     
@@ -47,6 +48,7 @@ public class OrderItemEntity implements Serializable {
         this.price = price;
     }
     
+    @JsonIgnore
     public OrderEntity getOrder() {
         return id.getOrder();
     }

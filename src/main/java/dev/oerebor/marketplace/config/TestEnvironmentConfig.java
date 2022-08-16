@@ -1,14 +1,8 @@
 package dev.oerebor.marketplace.config;
 
-import dev.oerebor.marketplace.entities.CategoryEntity;
-import dev.oerebor.marketplace.entities.OrderEntity;
-import dev.oerebor.marketplace.entities.ProductEntity;
-import dev.oerebor.marketplace.entities.UserEntity;
+import dev.oerebor.marketplace.entities.*;
 import dev.oerebor.marketplace.entities.enums.OrderStatus;
-import dev.oerebor.marketplace.repositories.ICategoryRepository;
-import dev.oerebor.marketplace.repositories.IOrderRepository;
-import dev.oerebor.marketplace.repositories.IProductRepository;
-import dev.oerebor.marketplace.repositories.IUserRepository;
+import dev.oerebor.marketplace.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +27,9 @@ public class TestEnvironmentConfig implements CommandLineRunner {
     @Autowired
     private IProductRepository productRepository;
     
+    @Autowired
+    private IOrderItemRepository orderItemRepository;
+    
     @Override
     public void run(String... args) throws Exception {
         UserEntity u1 = new UserEntity(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
@@ -51,6 +48,11 @@ public class TestEnvironmentConfig implements CommandLineRunner {
         ProductEntity p3 = new ProductEntity(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
         ProductEntity p4 = new ProductEntity(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
         ProductEntity p5 = new ProductEntity(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+    
+        OrderItemEntity oi1 = new OrderItemEntity(o1, p1, 2, p1.getPrice());
+        OrderItemEntity oi2 = new OrderItemEntity(o1, p3, 1, p3.getPrice());
+        OrderItemEntity oi3 = new OrderItemEntity(o2, p3, 2, p3.getPrice());
+        OrderItemEntity oi4 = new OrderItemEntity(o3, p5, 2, p5.getPrice());
         
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
@@ -70,5 +72,6 @@ public class TestEnvironmentConfig implements CommandLineRunner {
         p5.getCategories().add(cat2);
         
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
     }
 }

@@ -1,5 +1,7 @@
 package dev.oerebor.marketplace.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,6 +14,7 @@ public class ProductEntity implements Serializable {
     
     @Serial
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +30,9 @@ public class ProductEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<CategoryEntity> categories = new HashSet<>();
+    
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItemEntity> items = new HashSet<>();
     
     public ProductEntity() {
     
@@ -82,6 +88,15 @@ public class ProductEntity implements Serializable {
     
     public Set<CategoryEntity> getCategories() {
         return categories;
+    }
+    
+    @JsonIgnore
+    public Set<OrderEntity> getOrders() {
+        Set<OrderEntity> orders = new HashSet<>();
+        for (OrderItemEntity item : items) {
+            orders.add(item.getOrder());
+        }
+        return orders;
     }
     
     @Override

@@ -5,7 +5,6 @@ import dev.oerebor.marketplace.entities.pk.OrderItemPk;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItemEntity implements Serializable {
+    
     @Serial
     private static final long serialVersionUID = 1L;
     

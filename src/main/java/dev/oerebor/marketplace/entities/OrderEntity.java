@@ -13,6 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_order")
 public class OrderEntity implements Serializable {
+    
     @Serial
     private static final long serialVersionUID = 1L;
     
@@ -28,7 +29,6 @@ public class OrderEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private UserEntity client;
-    
     
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItemEntity> items = new HashSet<>();

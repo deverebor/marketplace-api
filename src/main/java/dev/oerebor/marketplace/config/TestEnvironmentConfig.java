@@ -37,7 +37,7 @@ public class TestEnvironmentConfig implements CommandLineRunner {
     
         OrderEntity o1 = new OrderEntity(null, Instant.parse("2022-06-20T19:53:07Z"), OrderStatus.PAID, u1);
         OrderEntity o2 = new OrderEntity(null, Instant.parse("2022-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, u2);
-        OrderEntity o3 = new OrderEntity(null, Instant.parse("2022-08-07T07:07:07Z"), OrderStatus.WAITING_PAYMENT, u1);
+        OrderEntity o3 = new OrderEntity(null, Instant.parse("2022-08-07T07:07:07Z"), OrderStatus.SHIPPED, u1);
     
         CategoryEntity cat1 = new CategoryEntity(null, "Electronics");
         CategoryEntity cat2 = new CategoryEntity(null, "Books");
@@ -53,6 +53,8 @@ public class TestEnvironmentConfig implements CommandLineRunner {
         OrderItemEntity oi2 = new OrderItemEntity(o1, p3, 1, p3.getPrice());
         OrderItemEntity oi3 = new OrderItemEntity(o2, p3, 2, p3.getPrice());
         OrderItemEntity oi4 = new OrderItemEntity(o3, p5, 2, p5.getPrice());
+        
+        PaymentEntity pay1 = new PaymentEntity(null, Instant.parse("2022-06-20T21:53:07Z"), o1);
         
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
@@ -73,5 +75,8 @@ public class TestEnvironmentConfig implements CommandLineRunner {
         
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+        
+        o1.setPayment(pay1);
+        orderRepository.save(o1);
     }
 }

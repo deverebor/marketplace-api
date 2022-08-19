@@ -65,6 +65,10 @@ public class OrderItemEntity implements Serializable {
         id.setProduct(product);
     }
     
+    public Double getSubTotal() {
+        return price * quantity;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

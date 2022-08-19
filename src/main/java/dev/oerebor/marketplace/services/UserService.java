@@ -27,4 +27,8 @@ public class UserService {
     public UserEntity createUser(UserEntity user) {
         return userRepository.save(user);
     }
+    
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
 }

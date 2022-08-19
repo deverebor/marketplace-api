@@ -1,5 +1,7 @@
 package dev.oerebor.marketplace.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
@@ -17,6 +19,7 @@ public class PaymentEntity implements Serializable {
     private Long id;
     private Instant createdAt;
     
+    @JsonIgnore
     @OneToOne
     @MapsId
     private OrderEntity order;

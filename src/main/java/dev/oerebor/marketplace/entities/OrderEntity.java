@@ -92,6 +92,16 @@ public class OrderEntity implements Serializable {
         this.client = client;
     }
     
+    public Double getOrdersTotals() {
+        double orderTotal = 0.0;
+        
+        for(OrderItemEntity item : items) {
+            orderTotal += item.getSubTotal();
+        }
+        
+        return orderTotal;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

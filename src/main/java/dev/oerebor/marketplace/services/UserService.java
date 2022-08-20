@@ -2,8 +2,11 @@ package dev.oerebor.marketplace.services;
 
 import dev.oerebor.marketplace.entities.UserEntity;
 import dev.oerebor.marketplace.repositories.IUserRepository;
+import dev.oerebor.marketplace.services.exceptions.DatabaseException;
 import dev.oerebor.marketplace.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +33,13 @@ public class UserService {
     }
     
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
     
     public UserEntity updateUser(Long id, UserEntity user) {

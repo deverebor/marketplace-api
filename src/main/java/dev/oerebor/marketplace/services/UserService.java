@@ -2,9 +2,14 @@ package dev.oerebor.marketplace.services;
 
 import dev.oerebor.marketplace.entities.UserEntity;
 import dev.oerebor.marketplace.repositories.IUserRepository;
+import dev.oerebor.marketplace.services.exceptions.DatabaseException;
+import dev.oerebor.marketplace.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +26,7 @@ public class UserService {
     public UserEntity findById(Long id) {
         Optional<UserEntity> user = userRepository.findById(id);
         
-       return user.get();
+       return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
     
     public UserEntity createUser(UserEntity user) {
@@ -29,15 +34,25 @@ public class UserService {
     }
     
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        try {
+            userRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
     
     public UserEntity updateUser(Long id, UserEntity user) {
-        UserEntity newUser = userRepository.getReferenceById(id);
-        
-        updateUserData(newUser, user);
-        
-        return userRepository.save(newUser);
+        try {
+            UserEntity newUser = userRepository.getReferenceById(id);
+    
+            updateUserData(newUser, user);
+    
+            return userRepository.save(newUser);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
     
     private void updateUserData(UserEntity newUser, UserEntity user) {

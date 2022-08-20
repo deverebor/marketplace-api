@@ -2,6 +2,7 @@ package dev.oerebor.marketplace.services;
 
 import dev.oerebor.marketplace.entities.UserEntity;
 import dev.oerebor.marketplace.repositories.IUserRepository;
+import dev.oerebor.marketplace.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class UserService {
     public UserEntity findById(Long id) {
         Optional<UserEntity> user = userRepository.findById(id);
         
-       return user.get();
+       return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
     
     public UserEntity createUser(UserEntity user) {

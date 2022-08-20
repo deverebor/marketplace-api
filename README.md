@@ -18,19 +18,19 @@ Where I went further and created unit tests and restructured some endpoints.
 
 Marketplace returns the following status codes in its API:
 
-| Functionality                             | Verb     | Description           | Authentication |
-|:------------------------------------------|:---------|:----------------------|:---------------|
-| https://api.herokuapp.com/user            | `GET`    | Lists all users.      | `FALSE`        |
-| https://api.herokuapp.com/user/{id}       | `GET`    | Lists a user.         | `FALSE`        |
-| https://api.herokuapp.com/order/          | `GET`    | Lists all orders.     | `FALSE`        |
-| https://api.herokuapp.com/order/{id}      | `GET`    | List an order.        | `FALSE`        |
-| https://api.herokuapp.com/categories      | `GET`    | Lists all categories. | `FALSE`        |
-| https://api.herokuapp.com/categories/{id} | `GET`    | Lists a category.     | `FALSE`        |
-| https://api.herokuapp.com/product/        | `GET`    | Lists all products.   | `FALSE`        |
-| https://api.herokuapp.com/product/{id}    | `GET`    | Lists a product.      | `FALSE`        |
-| https://api.herokuapp.com/user/{id}       | `DELETE` | Removes a user.       | `FALSE`        |
-| https://api.herokuapp.com/user/{id}       | `POST`   | Adds a user.          | `FALSE`        |
-| https://api.herokuapp.com/user/{id}       | `PUT`    | Updates a user.       | `FALSE`        |
+| Functionality                                                | Verb     | Description           | Authentication |
+|:-------------------------------------------------------------|:---------|:----------------------|:---------------|
+| https://api-marketplace-course.herokuapp.com/user            | `GET`    | Lists all users.      | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/user/{id}       | `GET`    | Lists a user.         | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/order/          | `GET`    | Lists all orders.     | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/order/{id}      | `GET`    | List an order.        | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/categories      | `GET`    | Lists all categories. | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/categories/{id} | `GET`    | Lists a category.     | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/product/        | `GET`    | Lists all products.   | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/product/{id}    | `GET`    | Lists a product.      | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/user/{id}       | `DELETE` | Removes a user.       | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/user/{id}       | `POST`   | Adds a user.          | `FALSE`        |
+| https://api-marketplace-course.herokuapp.com/user/{id}       | `PUT`    | Updates a user.       | `FALSE`        |
 
 ### Adjustments and improvements
 

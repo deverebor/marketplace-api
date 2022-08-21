@@ -36,37 +36,15 @@ Marketplace returns the following status codes in its API:
 
 The project is concluded but there are some points of improvement:
 
-- [ ] Migrate the database structure to postgresql
+- [X] Migrate the database structure to postgresql
 - [ ] Add unit tests to routes and their dependencies
-- [ ] Deploy on HEROKU.
+- [X] Deploy on HEROKU.
 
 ## 💻 Prerequisites
 
 Before you begin, make sure that you have met the following requirements:
 * You have installed the version of 'java 18'.
 * You have Postman installed to view how the API works ([CLICK HERE to access JSON with requests](./docs/postman)).
-
-## 🚀 Installing the project
-
-Follow this steps to install the project:
-
-> Clone the project repository.
-
-```zsh
-git clone git@github.com:deverebor/marketplace-api.git
-```
-
-> Enter the project directory.
-
-```zsh
-cd marketplace-api
-```
-
-> Access the API port to manipulate the developing database.
-
-```zsh
-http://localhost:8000/h2-console
-```
 
 ## 📫 Contribute to the project
 Follow this steps to contribute to the project:

@@ -1,0 +1,33 @@
+{
+	"info": {
+		"_postman_id": "9ca7b5d4-d264-4509-b8bc-991710a75a1e",
+		"name": "POST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18980639"
+	},
+	"item": [
+		{
+			"name": "User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Bob Brown\",\r\n  \"email\": \"bob@gmail.com\",\r\n  \"phone\": \"977557755\",\r\n  \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}users",
+					"host": [
+						"{{baseUrl}}users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
